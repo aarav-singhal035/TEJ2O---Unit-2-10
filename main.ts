@@ -1,61 +1,81 @@
 /* Copyright (c) 2020 MTHS All rights reserved
  *
- * Created by: Aarav Singhal
+ * Created by: Aarav
  * Created on: Dec 2025
- * This program displays neo strip with light
+ * This program turns on certain amounts of light depending on the light level
 */
 
-// variables
-let lightOf: number
-let neoPixelStrip: neopixel.Strip = null
+let lightvalue: number
+lightvalue = input.lightLevel()
+let neopixelStrip: neopixel.Strip = null
 
-// clean
-neoPixelStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
-neoPixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
-neoPixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
-neoPixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
-neoPixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
-neoPixelStrip.show()
+// Clean up
 basic.clearScreen()
+neopixelStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
+neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
+neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
+neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
+neopixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
+neopixelStrip.show()
 basic.showIcon(IconNames.Happy)
 
-// lights
 input.onButtonPressed(Button.A, function () {
+    // On button A
+    lightvalue = input.lightLevel()
+    if (lightvalue <= 51) {
+        neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
+        neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
+        neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
+        neopixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
+        neopixelStrip.show()
+        basic.showString('0')
+    }
+
+    if (lightvalue >= 52) {
+        neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        basic.showString('1')
+    }
+
+    if (lightvalue >= 104) {
+        neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        basic.showString('2')
+    }
+
+    if (lightvalue >= 156) {
+        neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        basic.showString('3')
+    }
+
+    if (lightvalue >= 208) {
+        neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        neopixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Violet))
+        neopixelStrip.show()
+        basic.showString('4')
+    }
+})
+
+input.onButtonPressed(Button.B, function () {
+    // On button B
     basic.clearScreen()
-    lightOf = input.lightLevel()
-    basic.showNumber(lightOf)
-
-    // none on
-    if (lightOf <= 51) {
-        neoPixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
-        neoPixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
-        neoPixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
-        neoPixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
-        neoPixelStrip.show()
-    }
-
-    // one on
-    if (lightOf > 52) {
-        neoPixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.White))
-        neoPixelStrip.show()
-    }
-
-    // two on
-    if (lightOf > 104) {
-        neoPixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.White))
-        neoPixelStrip.show()
-    }
-
-    // three on
-    if (lightOf > 156) {
-        neoPixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.White))
-        neoPixelStrip.show()
-    }
-
-    // all on
-    if (lightOf > 208) {
-        neoPixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.White))
-        neoPixelStrip.show()
-    }
-
+    neopixelStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
+    neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
+    neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
+    neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
+    neopixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
+    neopixelStrip.show()
+    basic.showIcon(IconNames.Happy)
 })
